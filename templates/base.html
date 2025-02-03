@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="StegaPro is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>{% block title %}{% endblock title %} </title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	
+	<!-- Favicon  -->
+    <link rel="icon" href="{% static 'images/S.jpg' %}">
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-f25b9277-217a-4c87-be24-76426cd54615" data-elfsight-app-lazy></div>
+
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+         <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-image" href="{% url 'pages:index' %}"><img src="{% static 'images/StegaPro_logo_smaller_font.svg' %}" alt="alternative"></a> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-awesome fas fa-bars"></span>
+                <span class="navbar-toggler-awesome fas fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{% url 'pages:index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{% url 'pages:index' %}#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{% url 'pages:index' %}#details">Detailes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{% url 'pages:index' %}#pricing">PRICING</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">POLICIES</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'pages:articledetails' %}"><span class="item-text">ARTICLE DETAILS</span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class=" dropdown-item" href="{% url 'pages:termsconditions' %}"><span class="item-text">TERMS CONDITIONS</span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{% url 'pages:privacypolicy' %}"><span class="item-text">PRIVACY POLICY</span></a>
+                        </div>
+                    </li>
+                   
+                </ul>
+                <span class="nav-item">
+                    <a class="btn-outline-sm" href="{% url 'pages:login' %}">LOG IN</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header id="header" class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{% block header %}{% endblock header %}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+{% block content %}
+
+{% endblock content%}
+
+ <!-- Footer -->
+ <svg class="footer-frame" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 79"><defs><style>.cls-2{fill:#5f4def;}</style></defs><title>footer-frame</title><path class="cls-2" d="M0,72.427C143,12.138,255.5,4.577,328.644,7.943c147.721,6.8,183.881,60.242,320.83,53.737,143-6.793,167.826-68.128,293-60.9,109.095,6.3,115.68,54.364,225.251,57.319,113.58,3.064,138.8-47.711,251.189-41.8,104.012,5.474,109.713,50.4,197.369,46.572,89.549-3.91,124.375-52.563,227.622-50.155A338.646,338.646,0,0,1,1920,23.467V79.75H0V72.427Z" transform="translate(0 -0.188)"/></svg>
+ <div class="footer">
+     <div class="container">
+         <div class="row">
+             <div class="col-md-4">
+                 <div class="footer-col first">
+                     <h4>About StegaPro</h4>
+                     <p class="p-small">We're passionate about providing a secure and efficient steganography tool to protect your sensitive data.</p>
+                 </div>
+             </div> <!-- end of col -->
+             <div class="col-md-4">
+                 <div class="footer-col middle">
+                     <h4>Important Links</h4>
+                     <ul class="list-unstyled li-space-lg p-small">
+                         <li class="media">
+                             <i class="fas fa-square"></i>
+                             <div class="media-body">Our business partners <a class ="turquoise" href="#your-link">startupguide.com</a></div>
+                         </li>
+                         <li class="media">
+                             <i class="fas fa-square"></i>
+                             <div class="media-body">Read our <a class="turquoise" href="terms-conditions.html">Terms & Conditions</a>, <a class="turquoise" href="privacy-policy.html">Privacy Policy</a></div>
+                         </li>
+                     </ul>
+                 </div>
+             </div> <!-- end of col -->
+             <div class="col-md-4">
+                 <div class="footer-col last">
+                     <h4>Contact Us</h4>
+                     <ul class="list-unstyled li-space-lg p-small">
+                         <li class="media">
+                             <i class="fas fa-map-marker-alt"></i>
+                             <div class="media-body">The faculty of computers and informations at benha univirsty</div>
+                         </li>
+                         <li class="media">
+                             <i class="fas fa-envelope"></i>
+                             <div class="media-body"><a class="turquoise" href="#your-link">contact@stegapro.com</a></div>
+                         </li>
+                     </ul>
+                 </div>
+             </div> <!-- end of col -->
+         </div> <!-- end of row -->
+     </div> <!-- end of container -->
+ </div> <!-- end of footer -->
+ <!-- end of footer -->
+
+
+ <!-- Copyright -->
+ <div class="copyright">
+     <div class="container">
+         <div class="row">
+             <div class="col-lg-12">
+                 <p class="p-small">Copyright © 2025 <b>StegaPro</b> - All rights reserved</p>
+             </div> <!-- end of col -->
+         </div> <!-- enf of row -->
+     </div> <!-- end of container -->
+ </div> <!-- end of copyright -->
+ <!-- end of copyright -->
+
+
+ <!-- Back To Top Button -->
+ 
+ <!-- end of back to top button -->
+
+
+ <!-- Scripts -->
+ <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+ <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+ <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+ <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+ <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+ <script src="{% static 'js/jquery.magnific-popup.js' %}"></script> <!-- Magnific Popup for lightboxes -->
+ <script src="{% static 'js/validator.min.js' %}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+ <script src="{% static 'js/script.js' %}"></script> <!-- Custom scripts -->
+ <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"1aab3052965f37edc48fc6df381727100","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+</body>
+</html>

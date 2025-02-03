@@ -1,0 +1,154 @@
+{% extends 'mainbase.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .top-banner {
+        height: 3cm;
+        background-color: rgba(95, 77, 237, 255);
+    }
+
+    .custom-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        color: #555;
+        background: #fff;
+        border: 2px solid rgba(95, 77, 237, 255);
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .custom-form-control:focus {
+        outline: none;
+        border-color: rgba(95, 77, 237, 255);
+        box-shadow: 0 0 5px rgba(95, 77, 237, 0.5);
+    }
+
+    .custom-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        color: #fff;
+        background: rgba(95, 77, 237, 255);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .custom-btn:hover {
+        background: rgba(95, 77, 237, 0.9);
+        box-shadow: 0 4px 8px rgba(95, 77, 237, 0.4);
+        transform: scale(1.02);
+    }
+
+    .custom-form-group label {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+    }
+</style>
+
+<div class="top-banner"></div>
+
+<div class="custom-container mt-5">
+    <h2>Embed Message into Image</h2>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'mainapp:encode' %}" class="custom-form">
+        {% csrf_token %}
+        
+        <!-- Image Input -->
+        <div class="custom-form-group">
+            <label for="image">Choose an image:</label>
+            <input type="file" id="image" name="image" class="custom-form-control" accept="image/*" required>
+            <small id="image-info" class="form-text text-muted">Upload an image to calculate the maximum message size.</small>
+        </div>
+        
+        <!-- Message Input -->
+        <div class="custom-form-group mt-3">
+            <label for="message">Enter your message:</label>
+            <textarea id="message" name="message" rows="4" class="custom-form-control" placeholder="Enter the text to hide" required></textarea>
+            <small id="char-count" class="form-text text-muted">Characters: 0 / --</small>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="custom-form-group mt-4">
+            <button type="submit" class="custom-btn" disabled id="submit-button">Embed Message</button>
+        </div>
+    </form>
+    
+    <script>
+        const imageInput = document.getElementById('image');
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('char-count');
+        const submitButton = document.getElementById('submit-button');
+    
+        let maxChars = 0; // Initialize max characters
+    
+        // Update character count on input and prevent exceeding maxChars
+        messageInput.addEventListener('input', (event) => {
+            const currentLength = messageInput.value.length;
+    
+            if (currentLength > maxChars) {
+                // Trim the input if it exceeds the max character limit
+                messageInput.value = messageInput.value.substring(0, maxChars);
+            }
+    
+            // Update character count display
+            const updatedLength = messageInput.value.length;
+            charCount.textContent = `Characters: ${updatedLength} / ${maxChars}`;
+    
+            // Enable/disable submit button
+            submitButton.disabled = updatedLength === 0 || updatedLength > maxChars;
+        });
+    
+        // Fetch max characters when an image is selected
+        imageInput.addEventListener('change', () => {
+            const file = imageInput.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('image', file);
+    
+                fetch("{% url 'mainapp:calculate_max_characters' %}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: formData,
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.max_chars) {
+                            maxChars = data.max_chars;
+                            charCount.textContent = `Characters: 0 / ${maxChars}`;
+                            submitButton.disabled = false;
+                            messageInput.disabled = false; // Enable message input
+                        } else {
+                            charCount.textContent = 'Error calculating max characters.';
+                            messageInput.disabled = true; // Disable message input
+                        }
+                    })
+                    .catch(() => {
+                        charCount.textContent = 'Error calculating max characters.';
+                        messageInput.disabled = true; // Disable message input
+                    });
+            }
+        });
+    </script>
+    
+    
+</div>
+
+{% endblock content %}

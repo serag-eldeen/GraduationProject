@@ -1,0 +1,113 @@
+{% extends 'premiumbase.html' %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        .top-banner {
+            height: 3cm;
+            background-color: rgba(95, 77, 237, 255);
+        }
+
+        .custom-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            color: #555;
+            background: #fff;
+            border: 2px solid rgba(95, 77, 237, 255);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-form-control:focus {
+            outline: none;
+            border-color: rgba(95, 77, 237, 255);
+            box-shadow: 0 0 5px rgba(95, 77, 237, 0.5);
+        }
+
+        .custom-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(95, 77, 237, 255);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-btn:hover {
+            background: rgba(95, 77, 237, 0.9);
+            box-shadow: 0 4px 8px rgba(95, 77, 237, 0.4);
+            transform: scale(1.02);
+        }
+
+        .custom-form-group label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f4e4;
+            border: 1px solid #c1e1c5;
+            color: #2f6627;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .error-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9e6e6;
+            border: 1px solid #e1b1b1;
+            color: #a12020;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    </style>
+
+    <div class="top-banner"></div>
+
+    <div class="custom-container mt-5">
+        <h2>Extract message from audio</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="custom-form-group">
+                <label for="audio">Upload an audio file:</label>
+                <input type="file" name="audio" id="audio" class="custom-form-control" required>
+            </div>
+            <div class="custom-form-group mt-4">
+                <button type="submit" class="custom-btn">Decode Message</button>
+            </div>
+        </form>
+
+        {% if message %}
+            <div class="message-box">
+                <strong>Extracted Message:</strong> {{ message }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error-box">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+    </div>
+    {% endblock %}
